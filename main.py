@@ -67,6 +67,14 @@ async def on_socket_raw_receive(msgs):
                     if r in roles:await member.add_roles(role)
                     else:await member.remove_roles(role)
 
+            elif ctx.custom_id=='audiophile_and_producer_2nd':
+                s_roles=[]
+                for i in config_data['audiophile_and_producer_2nd']['roles']:s_roles.append(str(i['id']))
+                for r in s_roles:
+                    role = guild.get_role(int(r))
+                    if r in roles:await member.add_roles(role)
+                    else:await member.remove_roles(role)
+
             ctx.interact.edit_response(f"Your roles have been updated!")
 
 
@@ -174,11 +182,11 @@ async def load_waitlist(ctx):
             description=""
         ))
     msg = {
-        "content": config_data['audiophile_and_producer']['message_content'], 
+        "content": config_data['audiophile_and_producer_2nd']['message_content'], 
         "components": message.components.action_row([
             message.components.select(
-                config_data['audiophile_and_producer']['place_holder'],
-                f"audiophile_and_producer",
+                config_data['audiophile_and_producer_2nd']['place_holder'],
+                f"audiophile_and_producer_2nd",
                 comp,
                 max=len(comp)
             )
