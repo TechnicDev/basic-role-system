@@ -13,6 +13,18 @@
             {
                 "id": "0000000000000000000",
                 "title": "She"
+            },
+            {
+                "id": "0000000000000000000",
+                "title": "She"
+            },
+            {
+                "id": "0000000000000000000",
+                "title": "She"
+            },
+            {
+                "id": "0000000000000000000",
+                "title": "She"
             }
         ]
     },
@@ -27,6 +39,20 @@
             {
                 "id": "0000000000000000000",
                 "title": "Audiophile"
+            }
+        ]
+    },
+    "notification": {
+        "message_content": "Do you want to get notified for announcements or events?",
+        "place_holder": "Make a selection",
+        "roles":[
+            {
+                "id":"0000000000000000000",
+                "title": "Role 1"
+            },
+            {
+                "id": "0000000000000000000",
+                "title": "Role 2"
             }
         ]
     }

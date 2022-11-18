@@ -58,6 +58,15 @@ async def on_socket_raw_receive(msgs):
                     role = guild.get_role(int(r))
                     if r in roles:await member.add_roles(role)
                     else:await member.remove_roles(role)
+
+            elif ctx.custom_id=='notification':
+                s_roles=[]
+                for i in config_data['notification']['roles']:s_roles.append(str(i['id']))
+                for r in s_roles:
+                    role = guild.get_role(int(r))
+                    if r in roles:await member.add_roles(role)
+                    else:await member.remove_roles(role)
+
             ctx.interact.edit_response(f"Your roles have been updated!")
 
 
@@ -121,6 +130,35 @@ async def load_roles(ctx):
     except:
         await ctx.send(f"There was an error while sending the message\n`{re.text}`")
         return
+
+    comp = []
+    for role in config_data['notification']['roles']:
+        comp.append(message.components.select_option(
+            label=role['title'],
+            value=str(role['id']),
+            description=""
+        ))
+    msg = {
+        "content": config_data['notification']['message_content'], 
+        "components": message.components.action_row([
+            message.components.select(
+                config_data['audiophile_and_producer']['place_holder'],
+                f"notification",
+                comp,
+                max=len(comp)
+            )
+        ]).data
+    }
+    re = requests.post(
+        f"https://discord.com/api/channels/{ctx.channel.id}/messages",
+        json=msg,
+        headers={"Authorization": f"Bot {config_data['bot_token']}"}
+    )
+    try: re.raise_for_status()
+    except:
+        await ctx.send(f"There was an error while sending the message\n`{re.text}`")
+        return
+
     await ctx.message.delete()
 
 
